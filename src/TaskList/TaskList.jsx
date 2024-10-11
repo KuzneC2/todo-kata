@@ -1,19 +1,29 @@
-import React from "react"
+import React, { Component } from "react"
 import Task from "../Task/Task"
 
-export function TaskList() {
-    return (
-        <>
-            <ul className="todo-list">
-                <Task status='completed' description='Completed task' timeCreated='created 17 seconds ago'></Task>
+export default class TaskList extends Component {
 
-                <Task status='editing' description='Editing task' timeCreated='created 5 minutes ago'></Task>
-                
-                <Task description='Active task' timeCreated='created 5 minutes ago'></Task>
+   
+    render() {
+        const { dataTasks, toggleStatusTodo, onDeleted } = this.props;
+
+        return (
+
+            <ul className="todo-list">
+                {dataTasks.map(task => (
+                    <Task
+                        key={task.id}
+                        status={task.status}
+                        description={task.description}
+                        timeCreated={task.timeCreated}
+                        toggleStatusTodo={() => toggleStatusTodo(task.id)}
+                        onDeleted={() => onDeleted(task.id)}
+                    />
+                ))}
+
 
             </ul>
-        </>
-    )
-}
 
-export default TaskList
+        )
+    }
+}
