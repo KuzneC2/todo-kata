@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 export default class Task extends Component {
     render() {
-        const { status, description, timeCreated, toggleStatusTodo, onDeleted } = this.props
+        const { status, description, timeCreated, toggleStatusTodo, onDeleted, onEdit, editSubmit, changeLabel, defaulDescription } = this.props
 
         const isCompleted = status === 'completed'
         if (status == 'editing') {
@@ -16,11 +16,18 @@ export default class Task extends Component {
                             <span className="created">{timeCreated}</span>
                         </label>
                         <button className="icon icon-edit"
-                            ></button>
+                        ></button>
                         <button className="icon icon-destroy"
-                        onClick={onDeleted}></button>
+                            onClick={onDeleted}>
+                        </button>
                     </div>
-                    <input type="text" className="edit" defaultValue="Editing task" />
+                    <form action=""
+                        onSubmit={editSubmit}
+                    >
+                        <input type="text" className="edit" defaultValue={defaulDescription}
+                            onChange={changeLabel}
+                        />
+                    </form>
                 </li>
             )
         }
@@ -38,10 +45,10 @@ export default class Task extends Component {
                             <span className="created">{timeCreated}</span>
                         </label>
                         <button className="icon icon-edit"
-                            
+                            onClick={onEdit}
                         ></button>
                         <button className="icon icon-destroy"
-                        onClick={onDeleted}></button>
+                            onClick={onDeleted}></button>
                     </div>
                 </li>
             )

@@ -3,14 +3,14 @@ import Task from "../Task/Task"
 
 export default class TaskList extends Component {
 
-   
+
     render() {
-        const { dataTasks, toggleStatusTodo, onDeleted } = this.props;
+        const { filteredDataTasks, toggleStatusTodo, onDeleted, onEdit, editSubmit, changeLabel, defaulDescription } = this.props;
 
         return (
 
             <ul className="todo-list">
-                {dataTasks.map(task => (
+                {filteredDataTasks.map(task => (
                     <Task
                         key={task.id}
                         status={task.status}
@@ -18,6 +18,10 @@ export default class TaskList extends Component {
                         timeCreated={task.timeCreated}
                         toggleStatusTodo={() => toggleStatusTodo(task.id)}
                         onDeleted={() => onDeleted(task.id)}
+                        onEdit={() => onEdit(task.id)}
+                        editSubmit={(e) => editSubmit(e, task.id)}
+                        changeLabel={(e) => changeLabel(e, task.id)}
+                        defaulDescription={task.defaulDescription}
                     />
                 ))}
 

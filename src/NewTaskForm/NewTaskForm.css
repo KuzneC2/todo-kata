@@ -1,0 +1,22 @@
+.form-todo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accept-todo{
+    margin: 0 13px 0 0;
+    width: 20%;
+    border-radius: 10px;
+    height: 40px;
+    border: 1px solid #f1f1f1;
+    color: gray;
+}
+.accept-todo:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.new-todo{
+    width: 80%;
+}
