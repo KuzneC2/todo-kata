@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 
@@ -54,4 +55,28 @@ export default class Task extends Component {
             )
         }
     }
+}
+
+Task.propTypes = {
+    status: PropTypes.node,
+    description: PropTypes.node,
+    timeCreated: PropTypes.node,
+    toggleStatusTodo: PropTypes.func,
+    onDeleted: PropTypes.func,
+    onEdit: PropTypes.func,
+    editSubmit: PropTypes.func,
+    changeLabel: PropTypes.func,
+    defaulDescription: PropTypes.node
+}
+
+Task.defaultProps = {
+    status: '',
+    description: '',
+    timeCreated: 'recently',
+    toggleStatusTodo: () => { },
+    onDeleted: () => { },
+    onEdit: () => { },
+    editSubmit: () => { },
+    changeLabel: () => { },
+    defaulDescription: 'Edit task'
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Footer from '../Footer/Footer'
 import NewTaskForm from '../NewTaskForm/NewTaskForm'
 import TaskList from '../TaskList/TaskList'
+import { formatDistanceToNowStrict } from 'date-fns'
 import './App.css'
 
 class App extends Component {
@@ -10,30 +11,58 @@ class App extends Component {
     this.maxId = 100;
     this.state = {
       dataTasks: [
-        this.createTodoItem('Completed task', 'created 17 seconds ago', 'completed'),
-        this.createTodoItem('Editing task', 'created 5 minutes ago', 'editing'),
-        this.createTodoItem('Active task', 'created 5 minutes ago'),
+        this.createTodoItem('обезуметь', '2024-10-14T15:05:10', 'completed'),
+        this.createTodoItem('поспать 8 часов', '2024-10-14T14:59:10', ''),
+        this.createTodoItem('сделать проект', '2024-10-14T14:59:00'),
       ],
       filteredDataTasks: [],
       filterName: 'all',
       editTaskId: null,
       editTaskDescription: ''
-    }
+    };
   }
 
-  createTodoItem = (description, timeCreated = 'now', status = '',) => {
+
+  updateTimer = () => {
+    setInterval(() => {
+      this.setState(prevState => ({
+        dataTasks: prevState.dataTasks.map(task => ({
+          ...task,
+          timeCreated: `created ${this.timeCreate(task.timer)}`
+        })),
+        filteredDataTasks: prevState.filteredDataTasks.map(task => ({
+          ...task,
+          timeCreated: `created ${this.timeCreate(task.timer)}`
+        }))
+      }));
+      console.log('Приветики')
+    }, 15000);
+  }
+
+  createTodoItem = (description, timer, status = '',) => {
     return {
       id: this.maxId++,
       description,
-      timeCreated,
+      timeCreated: `created ${this.timeCreate(timer)}`,
+      timer,
       status,
       defaulDescription: description
     }
+  }
 
+
+
+  timeCreate = (timer) => {
+    return formatDistanceToNowStrict(
+      new Date(timer),
+      {
+        addSuffix: true
+      }
+    )
   }
 
   addItem = (description) => {
-    const newItem = this.createTodoItem(description);
+    const newItem = this.createTodoItem(description, new Date() - 1);
     this.setState(({ dataTasks, filteredDataTasks, filterName }) => {
       const newArr = [newItem, ...dataTasks];
       const newFilterArr = [newItem, ...filteredDataTasks]
@@ -53,21 +82,27 @@ class App extends Component {
   }
 
   editTask = (id) => {
+    const newDescription = this.state.dataTasks.find(el => el.id == id)
     this.setState({
       filteredDataTasks: this.state.filteredDataTasks.map((task) => {
         if (task.id == id) {
           return { ...task, status: 'editing' }
         }
+        if (task.status == 'editing') {
+          const prevStatus = this.state.dataTasks.find(el => el.id == task.id)
+          return { ...task, status: prevStatus.status }
+        }
         else {
           return task
         }
       }),
+      editTaskDescription: newDescription.description
     })
   }
 
   editSubmit = (e, id) => {
     e.preventDefault()
-    const updateDataObject = this.state.dataTasks.filter(el => el.id === id)
+    const updateDataObject = this.state.dataTasks.find(el => el.id === id)
     this.setState((prevState) => ({
       dataTasks: prevState.dataTasks.map(task => {
         if (task.id === id) {
@@ -97,7 +132,7 @@ class App extends Component {
   }
 
   changeStatus = (id) => {
-    this.setState((prevState) => ({
+    this.setState((prevState, filterName) => ({
       dataTasks: prevState.dataTasks.map((task) => {
         if (task.id == id) {
           if (task.status == '') {
@@ -138,9 +173,14 @@ class App extends Component {
     })
   }
 
-  componentDidMount = () => {
-    this.setState({ filteredDataTasks: this.state.dataTasks })
+  componentDidMount() {
+    this.setState({ filteredDataTasks: this.state.dataTasks });
+    this.updateTimer()
+
   }
+
+
+
 
   changeListAll = () => {
     this.setState(() => ({
@@ -151,7 +191,6 @@ class App extends Component {
   }
 
   changeListActive = () => {
-
     this.setState(() => ({
       filteredDataTasks: this.state.dataTasks.filter(el => el.status === ''),
       filterName: 'active'
@@ -178,6 +217,7 @@ class App extends Component {
     const { filteredDataTasks } = this.state
     const taskDone = this.state.dataTasks.filter(el => el.status === 'completed').length;
     const taskLeft = this.state.dataTasks.length - taskDone;
+
     return (
       <>
         <section className="todoapp">

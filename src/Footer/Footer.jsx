@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TasksFilter from "../TasksFilter/TasksFilter";
+import PropTypes from "prop-types";
 
 export default class Footer extends Component {
     render() {
@@ -18,4 +19,20 @@ export default class Footer extends Component {
             </footer>
         )
     }
+}
+
+Footer.propTypes = {
+    itemsLeft: PropTypes.node,
+    changeDirectoryAll: PropTypes.func,
+    changeDirectoryActive: PropTypes.func,
+    changeDirectoryComplete: PropTypes.func,
+    clearCompleateItems: PropTypes.func
+}
+
+Footer.defaultProps = {
+    itemsLeft: '',
+    changeDirectoryAll: () => { },
+    changeDirectoryActive: () => { },
+    changeDirectoryComplete: () => { },
+    clearCompleateItems: () => { }
 }

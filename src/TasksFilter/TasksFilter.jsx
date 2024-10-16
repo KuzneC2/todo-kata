@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 export default class TasksFilter extends Component {
@@ -27,8 +28,6 @@ export default class TasksFilter extends Component {
     render() {
 
         const { filterDirectory } = this.state;
-
-        // const { changeDirectoryAll, changeDirectoryActive, changeDirectoryComplete } = this.props
         return (
             <ul className="filters">
                 <li>
@@ -49,4 +48,17 @@ export default class TasksFilter extends Component {
             </ul>
         )
     }
+}
+
+TasksFilter.propTypes ={
+    changeDirectoryAll: PropTypes.func,
+    changeDirectoryActive: PropTypes.func,
+    changeDirectoryComplete: PropTypes.func
+    
+}
+
+TasksFilter.defaultProps = {
+    changeDirectoryAll: () => {},
+    changeDirectoryActive: () => {},
+    changeDirectoryComplete: () => {},
 }

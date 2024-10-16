@@ -1,11 +1,12 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types";
 import Task from "../Task/Task"
 
 export default class TaskList extends Component {
 
 
     render() {
-        const { filteredDataTasks, toggleStatusTodo, onDeleted, onEdit, editSubmit, changeLabel, defaulDescription } = this.props;
+        const { filteredDataTasks, toggleStatusTodo, onDeleted, onEdit, editSubmit, changeLabel } = this.props;
 
         return (
 
@@ -30,4 +31,21 @@ export default class TaskList extends Component {
 
         )
     }
+}
+
+TaskList.propTypes = {
+    filteredDataTasks: PropTypes.array,
+    toggleStatusTodo: PropTypes.func,
+    onDeleted: PropTypes.func,
+    onEdit: PropTypes.func,
+    editSubmit: PropTypes.func,
+    changeLabel: PropTypes.func,
+}
+TaskList.defaultProps = {
+    filteredDataTasks: [],
+    toggleStatusTodo: () => { },
+    onDeleted: () => { },
+    onEdit: () => { },
+    editSubmit: () => { },
+    changeLabel: () => { },
 }
