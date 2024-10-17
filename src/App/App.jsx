@@ -38,7 +38,7 @@ class App extends Component {
     }, 15000);
   }
 
-  createTodoItem = (description, timer, status = '',) => {
+  createTodoItem = (description, timer, status = '', nt) => {
     return {
       id: this.maxId++,
       description,
