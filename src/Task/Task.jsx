@@ -1,14 +1,15 @@
-import PropTypes from "prop-types";
-import React, { Component } from "react";
-
+import PropTypes from 'prop-types';
+import { Component } from 'react';
 
 export default class Task extends Component {
-    render() {
-        const { status, description, timeCreated, toggleStatusTodo, onDeleted, onEdit, editSubmit, changeLabel, defaulDescription } = this.props
+  render() {
+    const {
+      status, description, timeCreated, toggleStatusTodo, onDeleted, onEdit, editSubmit, changeLabel, defaulDescription,
+    } = this.props;
 
-        const isCompleted = status === 'completed'
-        if (status == 'editing') {
-            return (
+    const isCompleted = status === 'completed';
+    if (status === 'editing') {
+      return (
                 <li className={status}>
                     <div className="view">
                         <input className="toggle" type="checkbox" />
@@ -30,10 +31,10 @@ export default class Task extends Component {
                         />
                     </form>
                 </li>
-            )
-        }
-        else {
-            return (
+      );
+    }
+
+    return (
                 <li className={status}>
                     <div className="view">
 
@@ -52,31 +53,30 @@ export default class Task extends Component {
                             onClick={onDeleted}></button>
                     </div>
                 </li>
-            )
-        }
-    }
+    );
+  }
 }
 
 Task.propTypes = {
-    status: PropTypes.node,
-    description: PropTypes.node,
-    timeCreated: PropTypes.node,
-    toggleStatusTodo: PropTypes.func,
-    onDeleted: PropTypes.func,
-    onEdit: PropTypes.func,
-    editSubmit: PropTypes.func,
-    changeLabel: PropTypes.func,
-    defaulDescription: PropTypes.node
-}
+  status: PropTypes.node,
+  description: PropTypes.node,
+  timeCreated: PropTypes.node,
+  toggleStatusTodo: PropTypes.func,
+  onDeleted: PropTypes.func,
+  onEdit: PropTypes.func,
+  editSubmit: PropTypes.func,
+  changeLabel: PropTypes.func,
+  defaulDescription: PropTypes.node,
+};
 
 Task.defaultProps = {
-    status: '',
-    description: '',
-    timeCreated: 'recently',
-    toggleStatusTodo: () => { },
-    onDeleted: () => { },
-    onEdit: () => { },
-    editSubmit: () => { },
-    changeLabel: () => { },
-    defaulDescription: 'Edit task'
-}
+  status: '',
+  description: '',
+  timeCreated: 'recently',
+  toggleStatusTodo: () => { },
+  onDeleted: () => { },
+  onEdit: () => { },
+  editSubmit: () => { },
+  changeLabel: () => { },
+  defaulDescription: 'Edit task',
+};

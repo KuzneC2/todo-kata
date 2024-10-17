@@ -1,17 +1,17 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types";
-import Task from "../Task/Task"
+import { Component } from 'react';
+import PropTypes from 'prop-types';
+import Task from '../Task/Task';
 
 export default class TaskList extends Component {
+  render() {
+    const {
+      filteredDataTasks, toggleStatusTodo, onDeleted, onEdit, editSubmit, changeLabel,
+    } = this.props;
 
-
-    render() {
-        const { filteredDataTasks, toggleStatusTodo, onDeleted, onEdit, editSubmit, changeLabel } = this.props;
-
-        return (
+    return (
 
             <ul className="todo-list">
-                {filteredDataTasks.map(task => (
+                {filteredDataTasks.map((task) => (
                     <Task
                         key={task.id}
                         status={task.status}
@@ -26,26 +26,25 @@ export default class TaskList extends Component {
                     />
                 ))}
 
-
             </ul>
 
-        )
-    }
+    );
+  }
 }
 
 TaskList.propTypes = {
-    filteredDataTasks: PropTypes.array,
-    toggleStatusTodo: PropTypes.func,
-    onDeleted: PropTypes.func,
-    onEdit: PropTypes.func,
-    editSubmit: PropTypes.func,
-    changeLabel: PropTypes.func,
-}
+  filteredDataTasks: PropTypes.array,
+  toggleStatusTodo: PropTypes.func,
+  onDeleted: PropTypes.func,
+  onEdit: PropTypes.func,
+  editSubmit: PropTypes.func,
+  changeLabel: PropTypes.func,
+};
 TaskList.defaultProps = {
-    filteredDataTasks: [],
-    toggleStatusTodo: () => { },
-    onDeleted: () => { },
-    onEdit: () => { },
-    editSubmit: () => { },
-    changeLabel: () => { },
-}
+  filteredDataTasks: [],
+  toggleStatusTodo: () => { },
+  onDeleted: () => { },
+  onEdit: () => { },
+  editSubmit: () => { },
+  changeLabel: () => { },
+};

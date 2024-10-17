@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import Footer from '../Footer/Footer'
 import NewTaskForm from '../NewTaskForm/NewTaskForm'
 import TaskList from '../TaskList/TaskList'
@@ -35,11 +35,10 @@ class App extends Component {
           timeCreated: `created ${this.timeCreate(task.timer)}`
         }))
       }));
-      console.log('Приветики')
     }, 15000);
   }
 
-  createTodoItem = (description, timer, status = '',) => {
+  createTodoItem = (description, timer, status = '', getd) => {
     return {
       id: this.maxId++,
       description,
@@ -124,7 +123,7 @@ class App extends Component {
 
   }
 
-  changeLabel = (e, id) => {
+  changeLabel = (e) => {
     this.setState({
       editTaskDescription: e.target.value
     })
@@ -132,7 +131,7 @@ class App extends Component {
   }
 
   changeStatus = (id) => {
-    this.setState((prevState, filterName) => ({
+    this.setState((prevState) => ({
       dataTasks: prevState.dataTasks.map((task) => {
         if (task.id == id) {
           if (task.status == '') {
@@ -225,7 +224,7 @@ class App extends Component {
             <h1>todos</h1>
             <NewTaskForm
               addItem={this.addItem}
-            ></NewTaskForm>
+            />
           </header>
           <section className="main">
             <TaskList
@@ -235,15 +234,14 @@ class App extends Component {
               onEdit={this.editTask}
               editSubmit={this.editSubmit}
               changeLabel={this.changeLabel}
-            ></TaskList>
+            />
             <Footer
               itemsLeft={taskLeft}
               changeDirectoryAll={this.changeListAll}
               changeDirectoryActive={this.changeListActive}
               changeDirectoryComplete={this.changeListComplete}
               clearCompleateItems={this.clearCompleateItems}
-
-            ></Footer>
+            />
           </section>
         </section>
       </>
