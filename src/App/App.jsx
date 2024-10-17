@@ -1,10 +1,10 @@
-import React { Component } from 'react'
+import { Component } from 'react'
 import Footer from '../Footer/Footer'
 import NewTaskForm from '../NewTaskForm/NewTaskForm'
 import TaskList from '../TaskList/TaskList'
 import { formatDistanceToNowStrict } from 'date-fns'
 import './App.css'
-
+asdasd
 class App extends Component {
   constructor() {
     super();
