@@ -21,6 +21,7 @@ class App extends Component {
       editTaskDescription: ''
     };
   }
+  var a = 5
 
   updateTimer = () => {
     setInterval(() => {
