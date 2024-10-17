@@ -21,7 +21,7 @@ class App extends Component {
       editTaskDescription: ''
     };
   }
-
+console.log('test')
 
   updateTimer = () => {
     setInterval(() => {
@@ -38,7 +38,7 @@ class App extends Component {
     }, 15000);
   }
 
-  createTodoItem = (description, timer, status = '', nicet) => {
+  createTodoItem = (description, timer, status = '',) => {
     return {
       id: this.maxId++,
       description,
