@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint . --report-unused-disable-directives",
     "lint:fix": "eslint . --report-unused-disable-directives --fix --color",
-    "format": "prettier --write"
+    "format": "prettier --write",
+    "prepare": "husky install"
   },
   "dependencies": {
     "date-fns": "^4.1.0",
@@ -42,11 +43,7 @@
   "overrides": {
     "eslint": "^9.12.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
+  
   "lint-staged": {
     "*js": [
       "npm run lint:fix",
