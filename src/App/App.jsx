@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import React { Component } from 'react'
 import Footer from '../Footer/Footer'
 import NewTaskForm from '../NewTaskForm/NewTaskForm'
 import TaskList from '../TaskList/TaskList'
@@ -21,7 +21,6 @@ class App extends Component {
       editTaskDescription: ''
     };
   }
-console.log('test')
 
   updateTimer = () => {
     setInterval(() => {
